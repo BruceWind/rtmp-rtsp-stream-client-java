@@ -1,6 +1,8 @@
 package com.pedro.rtsp.rtp.packets;
 
 import android.media.MediaCodec;
+import android.util.Log;
+
 import com.pedro.rtsp.utils.RtpConstants;
 import java.nio.ByteBuffer;
 import java.util.Random;
@@ -47,6 +49,13 @@ public abstract class BasePacket {
 
   protected void updateTimeStamp(byte[] buffer, long timestamp) {
     long ts = timestamp * clock / 1000000000L;
+    if(this instanceof AacPacket){
+      Log.w("XXXXXXXX","audio ts:"+ts);
+    }
+    else{
+      Log.w("XXXXXXXX","video ts:"+ts);
+    }
+
     setLong(buffer, ts, 4, 8);
   }
 
